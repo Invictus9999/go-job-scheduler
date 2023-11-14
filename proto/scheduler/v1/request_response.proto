@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package scheduler.v1;
+option go_package = "github.com/Invictus9999/go-job-scheduler/proto/gen/scheduler/v1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "scheduler/v1/job.proto";
+
+message ScheduleRequest {
+    string email_id = 1;
+    bool recurring = 2;
+    google.protobuf.Timestamp start = 3;
+    google.protobuf.Duration frequency = 4;
+    google.protobuf.Duration timeout_after = 5;
+
+    oneof payload {
+        SimpleJobPayload simple_job_payload = 21;
+    }
+}
+
+message ScheduleResponse {
+    string job_id = 1;
+}
+
+message StatusRequest {
+    string job_id = 1;
+}
+
+message StatusResponse {
+    JobDetails job_details = 1;
+}

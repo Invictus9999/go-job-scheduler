@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package scheduler.v1;
+option go_package = "github.com/Invictus9999/go-job-scheduler/proto/gen/scheduler/v1";
+
+import "google/protobuf/timestamp.proto";
+
+message SimpleJobPayload {
+    string message = 1;
+}
+
+message JobDetails {
+    string id = 1;
+    string email_id = 2;
+    google.protobuf.Timestamp next_run = 3;
+
+    oneof payload {
+        SimpleJobPayload simple_job_payload = 21;
+    }
+}

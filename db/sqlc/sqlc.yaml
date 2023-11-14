@@ -1,0 +1,12 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "scheduler/queries"
+    schema: "scheduler/schemas"
+    database:
+      uri: "${POSTGRESQL_URL}"
+    gen:
+      go:
+        package: "scheduler"
+        out: "scheduler"
+        sql_package: "pgx/v5"
